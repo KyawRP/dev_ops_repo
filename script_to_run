@@ -6,5 +6,5 @@ puppet resource service apache2 ensure=running
 puppet resource file /tmp/clone ensure=absent force=true
 puppet resource file /tmp/clone ensure=directory
 cd /tmp/clone
-git clone https://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@github.com/KyawRP/dev_ops_repo.git
+git clone https://github.com/KyawRP/dev_ops_repo.git
 cp -p /tmp/clone/dev_ops_repo/index.html /var/www/html
