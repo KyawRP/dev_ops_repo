@@ -23,7 +23,7 @@ input('Do you want to update to Development container?')
                  puppet resource file /tmp/clone ensure=absent force=true;
                  puppet resource file /tmp/clone ensure=directory;
 	         cd /tmp/clone;
-	         git clone https://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@github.com/KyawRP/dev_ops_repo.git;
+	         git clone https://github.com/KyawRP/dev_ops_repo.git;
                  targets=puppetclient1;
                  locate_script='/tmp/clone/dev_ops_repo/script_to_run';
                  bolt script run $locate_script -t $targets -u clientadm -p user123 --no-host-key-check --run-as root;
