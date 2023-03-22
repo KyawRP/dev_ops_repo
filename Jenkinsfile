@@ -18,23 +18,24 @@ input('Do you want to update to Development container?')
                 }
           }
           steps {
-sh '''#!/bin/bash
-puppet resource file /tmp/clone ensure=absent force=true;
+                 sh '''
+		 #!/bin/bash
+                 puppet resource file /tmp/clone ensure=absent force=true;
                  puppet resource file /tmp/clone ensure=directory;
-	   cd /tmp/clone;
-	   git clone https://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@github.com/KyawRP/dev_ops_repo.git;
+	         cd /tmp/clone;
+	         git clone https://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@github.com/KyawRP/dev_ops_repo.git;
                  targets=puppetclient1;
-locate_script='/tmp/clone/dev_ops_repo/script_to_run';
+                 locate_script='/tmp/clone/dev_ops_repo/script_to_run';
                  bolt script run $locate_script -t $targets -u clientadm -p user123 --no-host-key-check --run-as root;
                  '''
                  echo "Development container updated"
-          }
+                }
           }
           stage('Four') {
           steps {
-input('Do you want to update to Production container: Proceed to Production')
+                   input('Do you want to update to Production container: Proceed to Production')
 
-          }
+                 }
           }
           stage('Five') {
           when {
@@ -43,18 +44,19 @@ input('Do you want to update to Production container: Proceed to Production')
                 }
           }
           steps {
-sh '''#!/bin/bash
-targets=puppetclient2;
-locate_script='/tmp/clone/dev_ops_repo/script_to_run';
-                 bolt script run $locate_script -t $targets -u clientadm -p user123 --no-host-key-check --run-as root;
-                 '''
-                 echo "Production container updated"
+                  sh '''
+		  #!/bin/bash
+                  targets=puppetclient2;
+                  locate_script='/tmp/clone/dev_ops_repo/script_to_run';
+                  bolt script run $locate_script -t $targets -u clientadm -p user123 --no-host-key-check --run-as root;
+                  '''
+                  echo "Production container updated"
+                }
           }
-          }
-stage('Completed updating Operation') {
-          steps {
-            echo 'Completed updating to Production Container'
-          }
+          stage('Completed updating Operation') {
+             steps {
+                   echo 'Completed updating to Production Container'
+                   }
           }
       }
 }
