@@ -20,12 +20,12 @@ input('Do you want to update to Development container?')
           steps {
                  sh '''
 		 #!/bin/bash
-                 puppet resource file /tmp/clone ensure=absent force=true;
-                 puppet resource file /tmp/clone ensure=directory;
+                 puppet resource file /tmp/clone/test ensure=absent force=true;
+                 puppet resource file /tmp/clone/test ensure=directory;
 	         cd /tmp/clone;
 	         git clone https://github.com/KyawRP/dev_ops_repo.git;
                  targets=puppetclient1;
-                 locate_script='/tmp/clone/dev_ops_repo/script_to_run';
+                 locate_script='/tmp/clone/test/dev_ops_repo/script_to_run';
                  bolt script run $locate_script -t $targets -u clientadm -p user123 --no-host-key-check --run-as root;
                  '''
                  echo "Development container updated"
@@ -47,7 +47,7 @@ input('Do you want to update to Development container?')
                   sh '''
 		  #!/bin/bash
                   targets=puppetclient2;
-                  locate_script='/tmp/clone/dev_ops_repo/script_to_run';
+                  locate_script='/tmp/clone/test/dev_ops_repo/script_to_run';
                   bolt script run $locate_script -t $targets -u clientadm -p user123 --no-host-key-check --run-as root;
                   '''
                   echo "Production container updated"
